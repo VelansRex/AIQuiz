@@ -1,0 +1,87 @@
+
+"""
+Name: AI Quiz
+Description: Azure OpenAI-Powered Quiz
+
+Instruction:
+1. Download AI Quiz Git repository: git clone https://github.com/twoj-user/ai-quiz-app.git
+2. Install openai library: pip install -r requirements.txt
+2. Run the app with command: python aiquiz.py
+
+About App:
+The app uses Microsoft Azure OpenAI API with free credits from a free Azure account, which are valid until 28-04-2025.
+"""
+
+import os
+from openai import AzureOpenAI
+
+# Azure OpenAI Client Configuration
+client = AzureOpenAI(
+    api_key="Fbd0Mv12pIlHmg9OFKnBFTyFVdEF8nwuDkWIUQFtjGkCxd1axr0WJQQJ99BDACHYHv6XJ3w3AAABACOGWqVI",
+    api_version="2024-12-01-preview",
+    azure_endpoint="https://azuretestai3.openai.azure.com/"
+)
+
+deployment_name = "gpt-4o-mini-2"
+
+# Loading a Text File
+def read_text_from_file(filename):
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            return file.read()
+    except FileNotFoundError:
+        print(f"Error: {filename} not found.")
+        return ""
+
+# System Prompt
+system_prompt = """
+    You are a quiz assistant. Given a text, generate one multiple-choice question with four options (a, b, c, d),
+    and mark the correct answer with a star (*).
+    """
+
+# Function for Generating a Question with Streaming
+def generate_streamed_question(text):
+    user_prompt_template = """
+    Given this educational text, generate one multiple-choice question with four options (a, b, c, d).
+    Mark the correct answer with an asterisk (*). For example:
+
+    Question: What is the capital of France?
+    a) Berlin
+    b) Madrid
+    c) Paris*
+    d) Rome
+    
+    TEXT:
+    {text}
+    """
+    prompt = user_prompt_template.format(text=text)
+
+    response = client.chat.completions.create(
+        model=deployment_name,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.7,
+        max_tokens=300,
+        stream=True  # Small chunks of information from the model, part of a conversation is processed before waiting for the entire output.
+    )
+
+    full_output = ""
+    for chunk in response:
+        if chunk.choices and chunk.choices[0].delta.content:
+            part = chunk.choices[0].delta.content
+            print(part, end="", flush=True)
+            full_output += part
+    print()
+    return full_output.strip()
+
+# Application Section
+if __name__ == "__main__":
+    content = read_text_from_file("ArtificialIntelligenceExamples.txt")
+
+    if content:
+        print("\nQuiz Question:\n")
+        for i in range(5):
+            print(f"\nQuestion {i+1}:")
+            generate_streamed_question(content)
