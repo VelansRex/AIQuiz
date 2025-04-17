@@ -5,7 +5,7 @@ Description: Azure OpenAI-Powered Quiz
 
 Instruction:
 1. Download AI Quiz Git repository: git clone https://github.com/twoj-user/ai-quiz-app.git
-2. Install openai library: pip install -r requirements.txt
+2. Install openai and python-dotenv libraries: pip install -r requirements.txt
 2. Run the app with command: python aiquiz.py
 
 About App:
@@ -13,16 +13,20 @@ The app uses Microsoft Azure OpenAI API with free credits from a free Azure acco
 """
 
 import os
+from dotenv import load_dotenv
 from openai import AzureOpenAI
+
+# Load environment variables from .env
+load_dotenv()
 
 # Azure OpenAI Client Configuration
 client = AzureOpenAI(
-    api_key="Fbd0Mv12pIlHmg9OFKnBFTyFVdEF8nwuDkWIUQFtjGkCxd1axr0WJQQJ99BDACHYHv6XJ3w3AAABACOGWqVI",
-    api_version="2024-12-01-preview",
-    azure_endpoint="https://azuretestai3.openai.azure.com/"
+    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT")
 )
 
-deployment_name = "gpt-4o-mini-2"
+deployment_name = os.getenv("DEPLOYMENT_NAME")
 
 # Loading a Text File
 def read_text_from_file(filename):
