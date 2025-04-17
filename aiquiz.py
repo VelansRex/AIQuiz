@@ -4,12 +4,12 @@ Name: AI Quiz
 Description: Azure OpenAI-Powered Quiz
 
 Instruction:
-1. Download AI Quiz Git repository: git clone https://github.com/twoj-user/ai-quiz-app.git
+1. Download AI Quiz Git repository: git clone https://github.com/VelansRex/AIQuiz.git
 2. Install openai and python-dotenv libraries: pip install -r requirements.txt
 2. Run the app with command: python aiquiz.py
 
 About App:
-The app uses Microsoft Azure OpenAI API with free credits from a free Azure account, which are valid until 28-04-2025.
+The app uses Microsoft Azure OpenAI API and GPT-4 Turbo model.
 """
 
 import os
