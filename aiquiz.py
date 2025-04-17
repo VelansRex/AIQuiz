@@ -26,6 +26,7 @@ client = AzureOpenAI(
     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT")
 )
 
+
 deployment_name = os.getenv("DEPLOYMENT_NAME")
 
 # Loading a Text File
