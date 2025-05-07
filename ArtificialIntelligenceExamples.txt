@@ -20,4 +20,4 @@ Artificial Intelligence (AI) is increasingly integrated into our daily routines,
 
 10. **Autonomous Vehicles**: Self-driving cars utilize AI to process sensor data, navigate roads, and make real-time decisions to ensure passenger safety.
 
-These examples illustrate the pervasive role of AI in enhancing various aspects of daily life, from convenience and security to personalized experiences..
+These examples illustrate the pervasive role of AI in enhancing various aspects of daily life, from convenience and security to personalized experiences.
