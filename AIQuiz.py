@@ -76,7 +76,7 @@ if __name__ == "__main__":
     print("About: The app uses Microsoft Azure OpenAI API and GPT-4o-mini model.")
     print("Instruction:")
     print("\
-        1. Download AI Quiz: https://storageazureother.blob.core.windows.net/aiquiz/AIQuiz.exe\n\
+        1. Download AI Quiz: https://github.com/VelansRex/AIQuiz/releases/download/Use/AIQuiz.exe\n\
         2. Run File: AIQuiz.exe\n\
         3. Project Repo: https://github.com/VelansRex/AIQuiz.git\n\
         ")
